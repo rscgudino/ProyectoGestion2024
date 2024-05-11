@@ -1,0 +1,54 @@
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="keywords" content="HTML, CSS, JavaScript">
+    <meta name="description" content="">
+    <meta name="author" content="Grupo 5">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    {% load static %}
+    <link rel="icon" type="image/x-icon" href="{% static '\img\favicon.ico' %}">
+    <link rel="stylesheet" href="{% static '\css\bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static '\css\style.css' %}">
+    <title>{% block titulo %} {% endblock titulo %}</title>
+</head>
+
+<body class="d-flex flex-column min-vh-100">
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top header py-3">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar" aria-controls="collapsibleNavbar" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="collapsibleNavbar">
+                <ul class="navbar-nav ms-auto">
+                    {% if perms.auth.add_user %}
+                    <li class="nav-item nav-superior">
+                        <a class="nav-link" href="/usuarios">Gestionar Usuarios</a>
+                    </li>
+                    <li class="nav-item nav-superior">
+                        <a class="nav-link" href="/productos">Gestionar Productos</a>
+                    </li>
+                    {% endif %}
+                    <li class="nav-item nav-superior">
+                    {% if user.is_authenticated %}
+                    <span class="text-light nav-link">Bienvenido, {{ user.username }} | <a class="btn btn-danger btn-sm" href="{% url 'logout' %}">Cerrar sesión</a> </span>
+                    {% else %}
+                    {% endif %}
+                </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div style="margin-top: 10vh">
+    {% block body %} {% endblock body %}
+    </div>
+
+
+<footer class="bg-dark text-light py-3 sticky-bottom mt-auto">
+    <div class="container text-center">
+        <p>Django-Grupo 13 &copy 2024<br>
+        <a href="mailto:admin@mail.com">Ayuda</a>
+        </p>
+    </div>
+</footer>
+</body>

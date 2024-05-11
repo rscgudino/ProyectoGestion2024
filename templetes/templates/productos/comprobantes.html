@@ -1,0 +1,48 @@
+
+{% extends 'productos\base_productos.html' %}
+
+{% block titulo %}Ver comprobantes{% endblock titulo %}
+
+{% block contenido %}
+
+<div id="tb_quizlist_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
+
+    <div class="row">
+        <div class="col-sm-12">
+            <table class="table table-bordered mb-0 dataTable no-footer  mx-auto" id="tb_quizlist" role="grid"
+                aria-describedby="tb_quizlist_info" style="width: 422px;">
+                <thead>
+                    <tr role="row">
+                        <th class="sorting" tabindex="0" aria-controls="tb_quizlist" rowspan="1" colspan="1"
+                            aria-label="" style="width: 20vw;">Fecha</th>
+                        <th class="sorting" tabindex="0" aria-controls="tb_quizlist" rowspan="1" colspan="1"
+                            aria-label="" style="width: 20vw;">Número</th>
+                        <th class="d-none d-sm-table-cell sorting_desc text-center" tabindex="0" aria-controls="tb_quizlist"
+                            rowspan="1" colspan="1" aria-sort="descending" aria-label="" style="width: 0px;">
+                            Tipo</th>
+                        <th class="d-none d-sm-table-cell sorting_desc" tabindex="0" aria-controls="tb_quizlist"
+                            rowspan="1" colspan="1" aria-sort="descending" aria-label="" style="width: 0px;">
+                            </th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <h1 class="text-center">Comprobantes:</h1>
+                    {% for e in comprobantes %}
+                    <tr role="row">
+                        <td class="align-middle">{{e.fecha|date:"d-m-Y"}}</td>
+                        <td class="align-middle">{{e.numero}}</td>
+                        <td class="align-middle d-none d-sm-table-cell sorting_1">{{e.tipo}}</td>
+                        {% load static %}
+                        <td class="align-middle d-none d-sm-table-cell sorting_1 "> <a class="" href="{% url 'comprobante_detalle' e.id %}"><img class="img-edit" src="{%static '\img\square-list.svg' %}" alt="" ></a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+
+</div>
+
+{% endblock contenido %}

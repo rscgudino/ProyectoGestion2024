@@ -1,0 +1,59 @@
+
+{% extends 'productos\base_productos.html' %}
+
+{% block titulo %}Stock de Productos{% endblock titulo %}
+
+{% block contenido %}
+{% if perms.productos.add_item %}
+<div class='link-right'> 
+    <a href="/productos/nuevo"> Agregar producto</a>
+    </div>
+{% endif %}
+<div id="tb_quizlist_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
+
+    <div class="row">
+        <div class="col-sm-12">
+            <table class="table table-bordered mb-0 dataTable no-footer  mx-auto" id="tb_quizlist" role="grid"
+                aria-describedby="tb_quizlist_info" style="width: 422px;">
+                <thead>
+                    <tr role="row">
+                        <th class="sorting" tabindex="0" aria-controls="tb_quizlist" rowspan="1" colspan="1"
+                            aria-label="" style="width: 20vw;">Producto</th>
+                        <th class="sorting" tabindex="0" aria-controls="tb_quizlist" rowspan="1" colspan="1"
+                            aria-label="" style="width: 20vw;">Fabricante</th>
+                        <th class="d-none d-sm-table-cell sorting_desc" tabindex="0" aria-controls="tb_quizlist"
+                            rowspan="1" colspan="1" aria-sort="descending" aria-label="" style="width: 0px;">
+                            Stock</th>
+                        {% if perms.productos.change_item %}
+                        <th class="d-none d-sm-table-cell sorting_desc" tabindex="0" aria-controls="tb_quizlist"
+                            rowspan="1" colspan="1" aria-sort="descending" aria-label="" style="width: 0px;">
+                            </th>
+                        <th class="d-none d-sm-table-cell sorting_desc" tabindex="0" aria-controls="tb_quizlist"
+                            rowspan="1" colspan="1" aria-sort="descending" aria-label="" style="width: 0px;">
+                            </th>
+                        {% endif %}
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <h1 class="text-center">Productos:</h1>
+                    {% for e in productos %}
+                    <tr role="row">
+                        <td class="align-middle">{{e.nombre}}</td>
+                        <td class="align-middle">{{e.fabricante}}</td>
+                        <td class="align-middle d-none d-sm-table-cell sorting_1 text-center">{{e.stock}}</td>
+                        {% if perms.productos.change_item %}
+                        {% load static %}
+                        <td class="align-middle d-none d-sm-table-cell sorting_1 "> <a class="" href="{% url 'editar_producto' e.id %}"><img class="img-edit" src="{%static '\img\pen-field.svg' %}" alt="" ></a></td>
+                        <td class="align-middle d-none d-sm-table-cell sorting_1 "> <a class="" href="{% url 'eliminar_producto' e.id %}"><img class="img-edit" src="{%static '\img\trash.svg' %}" alt="" ></a></td>
+                        {% endif %}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+{% endblock contenido %}

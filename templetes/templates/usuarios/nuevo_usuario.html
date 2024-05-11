@@ -1,0 +1,43 @@
+{% extends 'usuarios\base_usuarios.html' %}
+
+{% block titulo %}Nuevo usuario{% endblock titulo %}
+
+{% block contenido %}
+<div class="row justify-content-center mt-4 mb-4">
+  <div class="col-md-8">
+      <div class="card">
+          <div class="card-body">
+              <div class="form-group">
+                  <h1 class="text-center">Nuevo usuario</h1>
+                  {% for message in messages %}
+                  <div class="alert alert-{{ message.tags }}" role="alert">
+                      {{message}}
+                  </div>
+                  {% endfor %}
+                  <div class="card-body">
+                      <div class="form-group">
+                          <form id="nuevo_usuario" name="nuevo_usuario" action="{% url 'nuevo_usuario' %}" method="POST">
+                              {% csrf_token %}
+                              <div class="row">
+                                  {% for campo in form %}
+                                  <div class="col-md-12">
+                                      <div class="mb-3">     
+                                        <label for="name" class="form-label">{{ campo.label }}</label>
+                                          {{campo}}
+                                      </div>
+                                      <span class="error">{{campo.errors}}</span>
+                                  </div>
+                                  {% endfor %}
+                              </div>
+                              
+                              <button type="submit" class="btn btn-secondary btn-block">Guardar</button>
+                          </form>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+
+{% endblock contenido %}

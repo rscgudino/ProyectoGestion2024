@@ -1,0 +1,84 @@
+{% extends 'usuarios\base_usuarios.html' %}
+
+{% block titulo %}Editar usuario{% endblock titulo %}
+
+{% block contenido %}
+<div class="row justify-content-center mt-4 mb-4" style="width: 100%";>
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-body">
+                <div class="form-group">
+                    <div style="margin-top: 1vh;">
+                        {% load static %}
+                        <a class="" href="{% url 'mostrar_usuarios' %}"><img class="img-edit" src="{%static '\img\arrow-left.svg' %}" alt=""></a>
+                        <h1 class="text-center">Usuario: {{ usuario.username }}</h1>
+                    </div>
+                    
+                    {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }}" role="alert">
+                        {{message}}
+                    </div>
+                    {% endfor %}
+                    <div class="card-body">
+                        <div class="form-group">
+                            <fieldset class="border p-2">
+                                <legend class="float-none w-auto">Cambiar contraseña</legend>
+                            <form id="editar_usuario" name="editar_usuario" action="{% url 'editar_usuario' id_user %}"
+                                method="POST">
+                                {% csrf_token %}
+                                <div class="row">
+                                    {% for campo in form %}
+                                    <div class="col-md-12">
+                                        <div class="mb-3">
+                                            <label for="name" class="form-label">{{ campo.label }}</label>
+                                            {{campo}}
+                                        </div>
+                                        <span class="error">{{campo.errors}}</span>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+
+                                <button type="submit" class="btn btn-secondary btn-block" name="nueva_pass">Guardar</button>
+                            </form>
+                            </fieldset>
+
+                            <fieldset class="border p-2">
+                                <legend class="float-none w-auto">Cambiar nivel</legend>
+                            <form id="editar_usuario" name="editar_usuario" action="{% url 'editar_usuario' id_user %}"
+                                method="POST">
+                                {% csrf_token %}
+                                <div class="row">
+                                    {% for campo in formNuevoGrupo %}
+                                    <div class="col-md-12">
+                                        <div class="mb-3">
+                                            <p>Nivel Actual: {{usuario.groups.get}}</p>
+                                            <label for="name" class="form-label">{{ campo.label }}</label>
+                                            {{campo}}
+                                        </div>
+                                        <span class="error">{{campo.errors}}</span>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                                {% if usuario == user %}
+                                <div class="alert alert-warning" role="alert">
+                                    Se está editando a usted mismo: Tenga en cuanta que si selecciona un Nivel de Usuario diferente a Administrador, perderá acceso a Gestión de Usuarios y será redirigido a la sección Gestion de Productos
+                                </div>
+                                {% endif %}
+                                <button type="submit" class="btn btn-secondary btn-block" name="nuevo_grupo">Guardar</button>
+                            </form>
+                            </fieldset>
+
+                            {% load static %}
+                            <div class="div-elim-user" style="margin-top: 1vh;">
+                            <a href="{% url 'eliminar_usuario' id_user %}"><img class="img-edit" src="{%static '\img\trash.svg' %}" alt=""></a>
+                            </div>
+                            <a href="{% url 'mostrar_usuarios' %}"><img class="img-edit" src="{%static '\img\arrow-left.svg' %}" alt=""></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock contenido %}

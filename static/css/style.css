@@ -1,0 +1,68 @@
+    footer{
+        bottom: 0px;
+        text-align: center;
+    /*  background-image: linear-gradient(seagreen,darkgreen);*/
+        color: black;
+        color: whitesmoke;
+        padding-top: 2%;
+    }
+    
+    .paddingIconoFooter{
+        padding-left: 0.45vw;
+        padding-right: 0.45vw;
+    }
+
+    .nav-superior {
+        /*padding-left: 1vw;
+        padding-right: 1vw;*/
+        margin-left: 1vw;
+        margin-right: 1vw;
+        font-weight: bold;
+
+    }
+
+    .nav-superior:hover{
+        color: white;
+    }
+    
+    .img-edit{
+        width:1.5vw
+    }
+
+    .link-right {
+        position: relative;
+        text-align: right;
+    }
+    .error {
+        color: red;
+    }
+
+    .card-usuario:hover{
+    box-shadow: 0 0 2vh rgba(0,0,0,0.19)
+    }
+
+    .card-usuario{
+        margin: 1.5vh ;
+    }
+
+    .img-add-user{
+    width:2.5vw;
+    }
+
+    .img-add-user:hover{
+    box-shadow: 0 0 2vh rgb(#198754);
+    }
+    .div-add-user{
+    display: flex;
+    justify-content: center;
+    }
+
+    .div-elim-user{
+    display: flex;
+    justify-content: flex-end;
+    }
+
+    .usuario-grupo{
+    margin-bottom: 0;
+    }
+

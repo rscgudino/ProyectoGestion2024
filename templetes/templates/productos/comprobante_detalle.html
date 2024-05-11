@@ -1,0 +1,46 @@
+
+{% extends 'productos\base_productos.html' %}
+
+{% block titulo %}Detalle de comprobante {{comprobante.numero}} {% endblock titulo %}
+
+{% block contenido %}
+
+{% load static %}
+<a class="" href="{% url 'comprobantes' %}"><img class="img-edit" src="{%static '\img\arrow-left.svg' %}" alt=""></a>
+
+<div id="tb_quizlist_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
+
+    <div class="row">
+        <div class="col-sm-12">
+            <table class="table table-bordered mb-0 dataTable no-footer  mx-auto" id="tb_quizlist" role="grid"
+                aria-describedby="tb_quizlist_info" style="width: 422px;">
+                <thead>
+                    <tr role="row">
+                        <th class="sorting text-center" tabindex="0" aria-controls="tb_quizlist" rowspan="1" colspan="1"
+                            aria-label="" style="width: 20vw;">Artículo</th>
+                        <th class="sorting text-center" tabindex="0" aria-controls="tb_quizlist" rowspan="1" colspan="1"
+                            aria-label="" style="width: 20vw;">Cantidad</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <h1 class="text-center">Detalle de comprobante:</h1>
+                    <h5 class="text-center">Fecha: {{comprobante.fecha|date:"d-m-Y"}}</h5>
+                    <h5 class="text-center">Número: {{comprobante.numero}}</h5>
+                    <h5 class="text-center">Tipo: {% if comprobante.tipo == "ING" %} Ingreso {% elif comprobante.tipo == "EGR" %} Egreso {% endif %}</h5>
+
+                    {% for e in detalle_productos %}
+                    <tr role="row">
+                        <td class="align-middle">{{e.articulo.nombre}}</td>
+                        <td class="align-middle text-center">{{e.cantidad}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+
+</div>
+
+{% endblock contenido %}

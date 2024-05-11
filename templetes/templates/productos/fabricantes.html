@@ -1,0 +1,63 @@
+
+{% extends 'productos\base_productos.html' %}
+
+{% block titulo %}Ver fabricantes{% endblock titulo %}
+
+{% block contenido %}
+{% if perms.productos.add_item %}
+<div class='link-right'> 
+<a href="/productos/fabricantes/nuevo"> Agregar fabricante</a>
+</div>
+{% endif %}
+<div id="tb_quizlist_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
+    <div class="row">
+        <div class="col-sm-12">
+            <table class="table table-bordered mb-0 dataTable no-footer  mx-auto" id="tb_quizlist" role="grid"
+                aria-describedby="tb_quizlist_info" style="width: 422px;">
+                <thead>
+                    <tr role="row">
+                        <th class="sorting" tabindex="0" aria-controls="tb_quizlist" rowspan="1" colspan="1"
+                            aria-label="" style="width: 20vw;">Fabricante</th>
+                        <th class="d-none d-sm-table-cell sorting_desc" tabindex="0" aria-controls="tb_quizlist"
+                            rowspan="1" colspan="1" aria-sort="descending" aria-label="" style="width: 0px;">
+                            Dirección</th>
+                        <th class="d-none d-sm-table-cell sorting_desc" tabindex="0" aria-controls="tb_quizlist"
+                            rowspan="1" colspan="1" aria-sort="descending" aria-label="" style="width: 0px;">
+                            Teléfono</th>
+                        <th class="d-none d-sm-table-cell sorting_desc" tabindex="0" aria-controls="tb_quizlist"
+                            rowspan="1" colspan="1" aria-sort="descending" aria-label="" style="width: 0px;">
+                            Mail</th>
+                        {% if perms.productos.change_fabricante %}
+                        <th class="d-none d-sm-table-cell sorting_desc" tabindex="0" aria-controls="tb_quizlist"
+                            rowspan="1" colspan="1" aria-sort="descending" aria-label="" style="width: 0px;">
+                            </th>
+                        <th class="d-none d-sm-table-cell sorting_desc" tabindex="0" aria-controls="tb_quizlist"
+                            rowspan="1" colspan="1" aria-sort="descending" aria-label="" style="width: 0px;">
+                            </th>
+                        {% endif %}
+                    </tr>
+                </thead>
+                <tbody>
+
+                    <h1 class="text-center">Fabricantes:</h1>
+                    {% for f in fabricantes %}
+                    <tr role="row">
+                        <td class="align-middle d-none d-sm-table-cell sorting_1">{{f.nombre}}</td>
+                        <td class="align-middle d-none d-sm-table-cell sorting_1">{{f.direccion}}</td>
+                        <td class="align-middle d-none d-sm-table-cell sorting_1">{{f.telefono}}</td>
+                        <td class="align-middle d-none d-sm-table-cell sorting_1">{{f.email}}</td>
+                        {% if perms.productos.change_fabricante %}
+                        {% load static %}
+                        <td class="align-middle d-none d-sm-table-cell sorting_1 "> <a class="" href="{% url 'editar_fabricante' f.id %}"><img class="img-edit" title="Editar" src="{%static '\img\pen-field.svg' %}" alt="" ></a></td>
+                        <td class="align-middle d-none d-sm-table-cell sorting_1 "> <a class="" href="{% url 'eliminar_fabricante' f.id %}"><img class="img-edit" title="Eliminar" src="{%static '\img\trash.svg' %}" alt="" ></a></td>
+                        {% endif %}
+                    </tr>
+                    {% endfor %}
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+{% endblock contenido %}

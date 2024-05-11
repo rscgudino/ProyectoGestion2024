@@ -1,0 +1,28 @@
+
+{% extends 'base.html' %}
+
+{% block body %} 
+{% if user.is_authenticated %}
+    <div class="card-body " >
+        <ul class="nav nav-tabs mb-3">
+            <li class="nav-item">
+                <a class="nav-link" href="/productos">Productos</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/productos/modificar_stock">Ingreso/Egreso</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/productos/fabricantes">Fabricantes</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/productos/comprobantes">Ver Comprobantes</a>
+            </li>
+        </ul>
+
+        {% block contenido %} {% endblock contenido %}
+    </div>
+{% else %}
+<div class="d-flex justify-content-center badge fs-5 bg-danger text-wrap">NO TIENES PERMISO PARA VER ESTO</div>
+{% endif %}
+
+{% endblock body %}

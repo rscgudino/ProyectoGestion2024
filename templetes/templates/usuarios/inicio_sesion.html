@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block navSuperior %}
+
+{% endblock navSuperior %}
+
+{% block body %}
+<div class="container py-5">
+  <div class="row justify-content-center align-items-center">
+      <div class="col-md-6">
+
+          {% if form.non_field_errors %}
+              {% for error in form.non_field_errors %}
+                  <div class="alert alert-danger">
+                      <strong>{{ error|escape }}</strong>
+                  </div>
+              {% endfor %}
+          {% endif %}
+
+          <form method="POST" class="border rounded p-4">
+              {% csrf_token %}
+
+              <h2 class="text-center mb-4">Bienvenido al sistema de gestión</h2>
+              {% for message in messages %}
+              <div class="alert alert-{{ message.tags }}" role="alert">
+                      {{message}}
+              </div>
+          {% endfor %}
+              <div class="mb-4">
+                  <label for="{{ form.username.auto_id }}" class="form-label">Nombre de usuario</label>
+                  <input type="text" id="{{ form.username.auto_id }}" name="{{ form.username.name }}" class="form-control" placeholder="Ingresa el nombre de usuario" value="{{ form.username.value|default:'' }}">
+                  <div class="error">{{ form.username.errors }}</div>
+              </div>
+
+              <div class="mb-4">
+                  <label for="{{ form.password.auto_id }}" class="form-label">Contraseña</label>
+                  <input type="password" id="{{ form.password.auto_id }}" name="{{ form.password.name }}" class="form-control" placeholder="Ingresa la contraseña" value="{{ form.password.value|default:'' }}">
+                  <div class="error">{{ form.password.errors }}</div>
+              </div>
+
+              <div class="text-center">
+                  <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
+              </div>
+          </form>
+      </div>
+  </div>
+</div>
+
+
+</div>{% endblock %}

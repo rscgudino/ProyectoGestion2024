@@ -1,0 +1,44 @@
+
+{% extends 'productos\base_productos.html' %}
+
+{% block titulo %}Nuevo fabricante{% endblock titulo %}
+
+{% block contenido %}
+<div class="row justify-content-center mt-4 mb-4">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <div class="form-group">
+                    <h1 class="text-center">Agregar nuevo fabricante</h1>
+
+{% for message in messages %}
+    <div class="alert alert-{{ message.tags }}" role="alert">
+            {{message}}
+    </div>
+{% endfor %}
+
+<div class="card-body">
+    <div class="form-group">
+        <form id="nuevo-fabricante" name="nuevo-fabricante" action="{% url 'nuevo_fabricante' %}" method="POST">
+            {% csrf_token %}
+            <div class="row">
+                {% for campo in form_nuevo_fab %}
+                    <div class="col-md-12">
+                        <div class="mb-3">
+                            <label for="name" class="form-label">{{ campo.label }}</label>
+                            {{campo}}
+                        </div>
+                        <span class="error">{{campo.errors}}</span>
+                    </div>
+                {% endfor %}
+            </div>
+            <button type="submit" class="btn btn-secondary btn-block">Guardar</button>
+        </form>
+    </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+{% endblock contenido %}
